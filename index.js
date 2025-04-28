@@ -41,19 +41,32 @@ function cell() {
 }
 
 function GameController (
-  playerOneName = "player one",
-  playTwoName = "player two") {
+  playerOneName = window.prompt("Enter PlayerOne Name"),
+  playerTwoName = window.prompt("Enter PlayerTwo Name")
+) {
 
-    const gameboard = Gameboard()
+  const gameboard = Gameboard()
+  
+    const validateInput = (playerName) =>{
+      
+      while(playerName === "") {
+
+        playerName = window.prompt(`Please choose a Name`)
+      }
+      return playerName
+    }
+
+    let player1Name = validateInput(playerOneName)
+    let player2Name = validateInput(playerTwoName)
 
     const players = [
       {
-        name:playerOneName,
-        symbol : "X"
+        name:[player1Name],
+        symbol:[player1Name]
       },
       {
-        name: playTwoName,
-        symbol: "O"
+        name: [player2Name],
+        symbol: [player2Name]
       }
     ]
 
@@ -123,7 +136,7 @@ function GameController (
     const playRound = () => {
 
       if(gameover) return 
-      
+
       let results = checkWinner()
       if(results) {
         
